@@ -111,7 +111,7 @@ public enum LogicLayer {
             user.setAmount(amount);
             user.setZC(ZC);
             userMap.put(email,user);
-            String str = exeRC+"RC to "+amount+" ZC";
+            String str = exeRC+"RC to "+ZC+" ZC";
             ArrayList<String> tempList = TransactionMap.getOrDefault(zId,new ArrayList<String>());
             tempList.add(str);
             TransactionZCRC.put(zId,tempList);
@@ -126,8 +126,9 @@ public enum LogicLayer {
         double ZC = user.getZC();
 
         if(exeZC <= ZC){
-            double com = exeZC*changeRate;
-            double RC = com*0.0015;
+            double RC = exeZC*changeRate;
+            double commision = RC*0.0015;
+            RC = RC - commision;
             double amount = ZC - exeZC;
             user.setAmount(RC);
             user.setZC(amount);

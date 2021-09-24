@@ -60,6 +60,7 @@ public class MainRunner {
                             System.out.println("2. Transaction history of user");
                             System.out.println("3. RC transaction");
                             System.out.println("4. ZCoin Transaction");
+                            System.out.println("Press any other key to back");
                             int action = scan.nextInt();
                             if (action == 1) {
                                 user = LogicLayer.LOGIC.showAccountDetails(email);
@@ -77,6 +78,9 @@ public class MainRunner {
                                 }
                                 System.out.println("ZC to RC, RC to ZC and ZC Transaction");
                                ArrayList<String> list1 = LogicLayer.LOGIC.transactionHistory2(user.getzId());
+                                for(int j =0;j<list1.size();j++){
+                                    System.out.println(list.get(j));
+                                }
                             }
                             else if (action == 3) {
                                 boolean repeat2 = true;
