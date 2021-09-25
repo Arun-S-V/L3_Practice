@@ -1,4 +1,4 @@
-package com.zcoin;
+package com.ZCoin;
 
 public class Employee {
     private String email;

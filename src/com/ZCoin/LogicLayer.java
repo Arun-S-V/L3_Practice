@@ -1,4 +1,4 @@
-package com.zcoin;
+package com.ZCoin;
 
 import java.util.ArrayList;
 import java.util.HashMap;

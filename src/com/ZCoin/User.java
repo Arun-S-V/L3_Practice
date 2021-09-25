@@ -1,4 +1,4 @@
-package com.zcoin;
+package com.ZCoin;
 
 public class User {
     private String name;
