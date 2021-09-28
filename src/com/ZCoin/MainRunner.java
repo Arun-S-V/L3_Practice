@@ -73,13 +73,23 @@ public class MainRunner {
                             else if (action == 2) {
                                 ArrayList<String> list = LogicLayer.LOGIC.transactionHistory(user.getzId());
                                 System.out.println("-----------------RC Transaction------------------");
-                                for(int j =0;j<list.size();j++){
-                                    System.out.println(list.get(j));
+                                if(list != null) {
+                                    for (int j = 0; j < list.size(); j++) {
+                                        System.out.println(list.get(j));
+                                    }
                                 }
-                                System.out.println("ZC to RC, RC to ZC and ZC Transaction");
-                               ArrayList<String> list1 = LogicLayer.LOGIC.transactionHistory2(user.getzId());
-                                for(int j =0;j<list1.size();j++){
-                                    System.out.println(list.get(j));
+                                else{
+                                    System.out.println("RC Transaction is Empty");
+                                }
+                                System.out.println("--------ZC to RC, RC to ZC and ZC Transaction----------");
+                                ArrayList<String> list1 = LogicLayer.LOGIC.transactionHistory2(user.getzId());
+                                if(list != null) {
+                                    for (int j = 0; j < list1.size(); j++) {
+                                        System.out.println(list.get(j));
+                                    }
+                                }
+                                else{
+                                    System.out.println("ZC Transaction is Empty");
                                 }
                             }
                             else if (action == 3) {
@@ -158,36 +168,40 @@ public class MainRunner {
                     emp.setPassword(password);
                     if (LogicLayer.LOGIC.adminPortal(emp)) {
                         System.out.println("Login Successfully");
-                        System.out.println("1. Check Registered user and approve or Reject");
-                        System.out.println("2. Change RC rate");
-                        System.out.println("3. See User Transaction details");
-                        int action1 = scan.nextInt();
-                        if (action1 == 1) {
-                            ArrayList<User> userList = LogicLayer.LOGIC.userApprove();
-                            for (int i = 0; i < userList.size(); i++) {
-                                System.out.println("Name : " + userList.get(i).getName());
-                                System.out.println("Email : " + userList.get(i).getEmailId());
-                                System.out.println("Mobile Number : " + userList.get(i).getMobileNo());
-                                System.out.println("1. Approve");
-                                System.out.println("2. Reject");
-                                int action = scan.nextInt();
-                                if (action == 1) {
-                                    long zId = LogicLayer.LOGIC.adminApprove(userList.get(i));
-                                    System.out.println("Your Z_ID is : "+zId);
-                                } else if (action == 2) {
-                                    LogicLayer.LOGIC.adminReject(userList.get(i));
+                        boolean repeat6 = true;
+                        while(repeat6) {
+                            System.out.println("1. Check Registered user and approve or Reject");
+                            System.out.println("2. Change RC rate");
+                            System.out.println("3. See User Transaction details");
+                            int action1 = scan.nextInt();
+                            if (action1 == 1) {
+                                ArrayList<User> userList = LogicLayer.LOGIC.userApprove();
+                                for (int i = 0; i < userList.size(); i++) {
+                                    System.out.println("Name : " + userList.get(i).getName());
+                                    System.out.println("Email : " + userList.get(i).getEmailId());
+                                    System.out.println("Mobile Number : " + userList.get(i).getMobileNo());
+                                    System.out.println("1. Approve");
+                                    System.out.println("2. Reject");
+                                    int action = scan.nextInt();
+                                    if (action == 1) {
+                                        long zId = LogicLayer.LOGIC.adminApprove(userList.get(i));
+                                        System.out.println("Your Z_ID is : " + zId);
+                                    } else if (action == 2) {
+                                        LogicLayer.LOGIC.adminReject(userList.get(i));
+                                    }
                                 }
+                            } else if (action1 == 2) {
+                                System.out.println("Enter Changes Rate");
+                                long change = scan.nextLong();
+                                LogicLayer.LOGIC.changeZCRate(change);
+                            } else if (action1 == 3) {
+
+                            } else if (action1 > 3) {
+                                repeat6 = false;
                             }
                         }
-                        else if (action1 == 2) {
-                            System.out.println("Enter Changes Rate");
-                            long change = scan.nextLong();
-                            LogicLayer.LOGIC.changeZCRate(change);
-                        }
-                        else if(action1 == 3){
-
-                        }
-                    } else {
+                    }
+                    else {
                         System.out.println("Please check your Details");
                     }
                     break;

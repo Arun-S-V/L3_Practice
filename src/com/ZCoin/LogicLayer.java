@@ -54,7 +54,7 @@ public enum LogicLayer {
         return userTempList;
     }
     public long adminApprove(User user){
-        employeeList.remove(user);
+        userTempList.remove(0);
         user.setzId(zId);
         String email = user.getEmailId();
         userMap.put(email,user);
@@ -62,7 +62,7 @@ public enum LogicLayer {
         return zId-2;
     }
     public void adminReject(User user){
-        employeeList.remove(user);
+        employeeList.remove(0);
     }
     public User showAccountDetails(String email){
         User user = userMap.get(email);
